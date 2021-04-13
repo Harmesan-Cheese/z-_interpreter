@@ -6,6 +6,7 @@
 typedef struct TOKEN
 {
 	enum {
+      END,
 	   ID,
       NUMBER,
       LEFT_PAREN,
@@ -29,7 +30,6 @@ typedef struct TOKEN
 		IF,
 		ELSE,
 		PRINT,
-      END,
 	   NOTHING
    } tokentype;
    char *value;
@@ -39,7 +39,6 @@ TOKEN_T *inittoken(int tokentype, char *value);
 TOKEN_T *parsetoken(SOURCE_T *source);
 TOKEN_T *parseidtoken(SOURCE_T *source);
 TOKEN_T *parsenumbertoken(SOURCE_T *source);
-int isletter(char c);
-int isnum(char c);
+void skipwhitespace(SOURCE_T *source);
 
 #endif

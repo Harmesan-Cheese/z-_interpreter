@@ -1,0 +1,5 @@
+var a = 0
+var b = 12
+var c = a + b
+print(c)
+if(a > c)

@@ -40,5 +40,7 @@ TOKEN_T *parsetoken(SOURCE_T *source);
 TOKEN_T *parseidtoken(SOURCE_T *source);
 TOKEN_T *parsenumbertoken(SOURCE_T *source);
 void skipwhitespace(SOURCE_T *source);
+void advance(SOURCE_T *source);
+char peek(SOURCE_T *source, int offset);
 
 #endif

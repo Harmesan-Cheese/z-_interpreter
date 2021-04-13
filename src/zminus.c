@@ -5,10 +5,12 @@ void zminusinterpret(char *src)
 {
    SOURCE_T *source = initsource(src);
    TOKEN_T *token;
+   AST_T *ast;
    
-   while (token->tokentype != END)
+
+   while(1)
    {
-      token = parsetoken(source);
-      printf("TOKEN: ( %s ), TYPE: %d\n", token->value, token->tokentype);
+      ast = parseprg(source);
+      printf("TYPE: %d, VALUE: %d\n", ast->type, ast->value);
    }
 }

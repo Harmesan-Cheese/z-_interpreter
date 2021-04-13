@@ -1,2 +1,2 @@
-z-:
-	$(CC) src/main.c -o zmi
+z-: src/*.c 
+	$(CC) src/*.c -o zmi

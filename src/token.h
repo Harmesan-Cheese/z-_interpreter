@@ -1,7 +1,13 @@
+#ifndef TOKEN
+#define TOKEN
+
+#include "file.h"
+
 typedef struct TOKEN
 {
 	enum {
 	   ID,
+      NUMBER,
       LEFT_PAREN,
 		RIGHT_PAREN,
 		LEFT_BRACE,
@@ -22,9 +28,18 @@ typedef struct TOKEN
 		NEWLINE,
 		IF,
 		ELSE,
-		PRINT		
-	} tokentype;
+		PRINT,
+      END,
+	   NOTHING
+   } tokentype;
    char *value;
-} TOKEN;
+} TOKEN_T;
 
-TOKEN *inittoken(int tokentype, char *value);
+TOKEN_T *inittoken(int tokentype, char *value);
+TOKEN_T *parsetoken(SOURCE_T *source);
+TOKEN_T *parseidtoken(SOURCE_T *source);
+TOKEN_T *parsenumbertoken(SOURCE_T *source);
+int isletter(char c);
+int isnum(char c);
+
+#endif

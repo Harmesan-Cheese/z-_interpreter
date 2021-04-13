@@ -1,8 +1,14 @@
+#ifndef SOURCE
+#define SOURCE
+
 typedef struct SOURCE
 {
    char *src;
    int charat;
    int line;
-} SOURCE;
+   char c;
+} SOURCE_T;
 
-SOURCE *initsource(char *src);
+SOURCE_T *initsource(char *src);
+
+#endif

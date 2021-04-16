@@ -46,7 +46,6 @@ TOKEN_T *parseidtoken(SOURCE_T *source)
       strcat(value, &source->c);
       advance(source);
    }
-
    return inittoken(ID, value);
 }
 
@@ -136,10 +135,49 @@ TOKEN_T *parsetoken(SOURCE_T *source)
       case '/': return consumecurrent(source, DIVIDE);
       case '>': return consumecurrent(source, GREAT_THAN);
       case '<': return consumecurrent(source, LESS_THAN);
+      case ',': return consumecurrent(source, COMMA);
+      case '\\': return consumecurrent(source, BACKSLASH);
       case '\n': source->line++; return consume(source, inittoken(NEWLINE, "n")); source->line++; break;
       default:
          printf("Didn't recognize character: %c", source->c);
       }
    }
    return inittoken(END, 0);
+}
+
+const char *toktypetostr(int type)
+{
+   switch (type)
+   {
+      case ID: return "ID";
+      case NUMBER: return "NUMBER";
+      case VAR: return "VAR";
+      case EQUAL: return "EQUAL";
+      case EQUAL_EQUAL: return "EQUAL_EQUAL";
+      case LEFT_PAREN: return "LEFT_PAREN";
+      case RIGHT_PAREN: return "RIGHT_PAREN";
+      case LEFT_BRACE: return "LEFT_BRACE";
+      case RIGHT_BRACE: return "RIGHT_BRACE";
+      case ADD: return "ADD";
+      case SUB: return "SUB";
+      case MULTIPLE: return "MULTIPLE";
+      case DIVIDE: return "DIVIDE";
+      case GREAT_THAN: return "GREAT_THAN";
+      case LESS_THAN: return "LESS_THAN";
+      case NEWLINE: return "NEWLINE";
+      case END: return "END";
+   }
+
+   return "not_stringable";
+}
+
+char *toktostr(TOKEN_T *token)
+{
+   const char *typestr = toktypetostr(token->tokentype);
+   const char *template = "TYPE: %s NUM_TYPE: %d VALUE: %s\n";
+
+   char *str = calloc(strlen(typestr) + strlen(template) + 8, sizeof(char));
+   sprintf(str, template, typestr, token->tokentype, token->value);
+
+   return str;
 }

@@ -2,33 +2,29 @@
 #define AST_H
 #include "list.h"
 #include "token.h"
+#include "hash.h"
 
 typedef struct AST
 {
    enum
    {
-      EXPRESSION,
-      EQUALITY,
-      COMPARISON,
-      TERM,
-      FACTOR,
-      UNARY,
-      PRIMARY,
-      VARDECL,
-      PRINTSTMT,
-      BLOCK,
-      ERROR
+      ASSIGNMENT,
+      COMPOUND,
+      FUNC_DEF,
+      DEF_TYPE,
+      VARIABLE,
+      STMT,
+      PRINT,
+      NOOP
    } type;
 
    LIST_T *children;
-   int value;
    char *name;
+   struct AST *value;
+   struct DATAITEM *var;
 } AST_T;
 
 AST_T *initast(int type);
-AST_T *parseprg(SOURCE_T *source);
-AST_T *parsedecl(TOKEN_T *token, SOURCE_T *source);
-AST_T *parsevardecl(TOKEN_T *token, SOURCE_T *source);
-AST_T *parsestmt(TOKEN_T *token, SOURCE_T *source);
+int strtoint(char *str);
 
 #endif

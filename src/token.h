@@ -21,6 +21,8 @@ typedef struct TOKEN
 		LESS_THAN,
 		GREAT_THAN_EQUAL,
 		LESS_THAN_EQUAL,
+      COMMA,
+      BACKSLASH,
 		ADD,
 		SUB,
 		MULTIPLE,
@@ -42,5 +44,7 @@ TOKEN_T *parsenumbertoken(SOURCE_T *source);
 void skipwhitespace(SOURCE_T *source);
 void advance(SOURCE_T *source);
 char peek(SOURCE_T *source, int offset);
+const char *toktypetostr(int type);
+char *toktostr(TOKEN_T *token);
 
 #endif
